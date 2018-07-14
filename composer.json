@@ -15,7 +15,7 @@
         "reactivex/rxphp": "^2.0",
         "recoil/react": "^1.0",
         "recoil/recoil": "^1.0",
-        "wyrihaximus/rx-recoil-looper": "dev-master"
+        "wyrihaximus/rx-recoil-looper": "^1.0"
     },
     "require-dev": {
         "api-clients/test-utilities": "^4.2",
