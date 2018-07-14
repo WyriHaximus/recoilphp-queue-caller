@@ -5,10 +5,8 @@ namespace WyriHaximus\Tests\Rx;
 use ApiClients\Tools\TestUtilities\TestCase;
 use React\EventLoop\Factory;
 use Recoil\React\ReactKernel;
-use Throwable;
-use function ApiClients\Tools\Rx\observableFromArray;
 use WyriHaximus\Recoil\QueueCaller;
-use function WyriHaximus\Rx\observableWhile;
+use function ApiClients\Tools\Rx\observableFromArray;
 
 final class QueueCallerTest extends TestCase
 {
