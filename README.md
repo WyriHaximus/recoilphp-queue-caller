@@ -15,9 +15,11 @@ To install via [Composer](http://getcomposer.org/), use the command below, it wi
 composer require WyriHaximus/recoil-queue-caller
 ```
 
+The purpose of this package is to run all given callables inside a coroutine.
+
 # Usage
 
-The following example echo's `0123`
+The following example echo's `0123`:
 
 ```php
 $queueCaller = new QueueCaller($recoil);
