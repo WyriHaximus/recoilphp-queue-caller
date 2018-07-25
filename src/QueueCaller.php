@@ -26,14 +26,18 @@ final class QueueCaller
         $this->kernel->execute(function () use ($observable) {
             yield;
             $observableWhile = observableWhile($observable);
-            while ($callableAndArguments = (yield $observableWhile->get())) {
-                $callable = array_shift($callableAndArguments);
-                $arguments = $callableAndArguments;
-                unset($callableAndArguments);
-
-                yield $callable(...$arguments);
-
-                unset($callable, $arguments);
+            /** @var Call $call */
+            while ($call = (yield $observableWhile->get())) {
+                try {
+                    $callable = $call->getCallable();
+                    $arguments = $call->getArguments();
+                    $value = yield $callable(...$arguments);
+                    $call->resolve($value);
+                } catch (\Throwable $et) {
+                    $call->reject($et);
+                } finally {
+                    unset($callable, $arguments, $call);
+                }
             }
         });
     }

@@ -5,6 +5,7 @@ namespace WyriHaximus\Tests\Rx;
 use ApiClients\Tools\TestUtilities\TestCase;
 use React\EventLoop\Factory;
 use Recoil\React\ReactKernel;
+use WyriHaximus\Recoil\Call;
 use WyriHaximus\Recoil\QueueCaller;
 use function ApiClients\Tools\Rx\observableFromArray;
 
@@ -15,13 +16,16 @@ final class QueueCallerTest extends TestCase
         $i = 0;
         $array = [];
         foreach (range(1, 1000) as $_) {
-            $array[] = [function () use (&$i) {
+            $array[] = new Call(function () use (&$i) {
                 $i++;
-            }];
+            });
         }
 
         $loop = Factory::create();
         $recoil = ReactKernel::create($loop);
+        $recoil->setExceptionHandler(function ($et) {
+            echo (string)$et;
+        });
         $queueCaller = new QueueCaller($recoil);
         $queueCaller->call(observableFromArray($array));
         $loop->run();
