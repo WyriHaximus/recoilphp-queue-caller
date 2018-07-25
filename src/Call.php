@@ -5,7 +5,7 @@ namespace WyriHaximus\Recoil;
 use React\Promise\Deferred;
 use React\Promise\PromiseInterface;
 
-final class Call implements PromiseInterface
+final class Call
 {
     /**
      * @var callable
@@ -59,8 +59,8 @@ final class Call implements PromiseInterface
         $this->deferred->reject($value);
     }
 
-    public function then(callable $onFulfilled = null, callable $onRejected = null, callable $onProgress = null): PromiseInterface
+    public function wait(callable $onFulfilled = null, callable $onRejected = null): PromiseInterface
     {
-        return $this->deferred->promise()->then($onFulfilled, $onRejected, $onProgress);
+        return $this->deferred->promise()->then($onFulfilled, $onRejected);
     }
 }

@@ -4,6 +4,7 @@ namespace WyriHaximus\Tests\Rx;
 
 use ApiClients\Tools\TestUtilities\TestCase;
 use React\EventLoop\Factory;
+use React\Promise\Promise;
 use WyriHaximus\Recoil\Call;
 
 final class CallTest extends TestCase
@@ -29,7 +30,9 @@ final class CallTest extends TestCase
             $call->resolve(123);
         });
 
-        $result = $this->await($call, $loop);
+        $result = $this->await(new Promise(function ($resolve, $reject) use ($call) {
+            $call->wait($resolve, $reject);
+        }), $loop);
         self::assertSame(123, $result);
     }
 
@@ -44,6 +47,8 @@ final class CallTest extends TestCase
         });
 
         $this->expectException(\Exception::class, 'whoops!');
-        $this->await($call, $loop);
+        $this->await(new Promise(function ($resolve, $reject) use ($call) {
+            $call->wait($resolve, $reject);
+        }), $loop);
     }
 }
