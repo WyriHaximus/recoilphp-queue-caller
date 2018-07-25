@@ -27,13 +27,27 @@ $observable = observableFromArray(iterator_to_array((function () {
     $func = function ($a, $b) {
         echo $a + $b;
     };
-    yield [$func, 0, 0];
-    yield [$func, 0, 1];
-    yield [$func, 1, 1];
-    yield [$func, 1, 2];
+    yield new Call($func, 0, 0);
+    yield new Call($func, 0, 1);
+    yield new Call($func, 1, 1);
+    yield new Call($func, 1, 2);
 })()));
 $queueCaller->call($observable);
+```
 
+It is also possible to communicate results back:
+
+```php
+$call = new Call(function ($a, $b) {
+    return $a + $b;
+}, 1, 2);
+$call->wait(function ($result) {
+    echo $result; // Echo's 3
+});
+
+$queueCaller = new QueueCaller($recoil);
+$observable = observableFromArray([$call]);
+$queueCaller->call($observable);
 ```
 
 # License
