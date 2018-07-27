@@ -21,14 +21,18 @@ final class QueueCaller
         $this->kernel = $kernel;
     }
 
-    public function call(ObservableInterface $observable)
+    public function call(ObservableInterface $observable): State
     {
-        $this->kernel->execute(function () use ($observable) {
+        $state = new State();
+        $this->kernel->execute(function () use ($observable, $state) {
+            $state->onNext(State::STARTED);
             yield;
             $observableWhile = observableWhile($observable);
+            $state->onNext(State::WAITING);
             /** @var Call $call */
             while ($call = (yield $observableWhile->get())) {
                 try {
+                    $state->onNext(State::BUSY);
                     $callable = $call->getCallable();
                     $arguments = $call->getArguments();
                     $value = yield $callable(...$arguments);
@@ -37,8 +41,12 @@ final class QueueCaller
                     $call->reject($et);
                 } finally {
                     unset($callable, $arguments, $call);
+                    $state->onNext(State::WAITING);
                 }
             }
+            $state->onNext(State::DONE);
         });
+
+        return $state;
     }
 }
