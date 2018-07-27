@@ -11,4 +11,21 @@ final class State extends Subject
     public const WAITING = 2;
     public const BUSY    = 3;
     public const DONE    = 4;
+
+    private $state = self::CREATED;
+
+    public function onNext($state)
+    {
+        if (!is_int($state) || $state < 0 || $state > 4) {
+            throw InvalidStateException::create($state);
+        }
+
+        $this->state = $state;
+        parent::onNext($state);
+    }
+
+    public function getState(): int
+    {
+        return $this->state;
+    }
 }
