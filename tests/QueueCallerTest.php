@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace WyriHaximus\Tests\Rx;
+namespace WyriHaximus\Tests\Recoil;
 
 use ApiClients\Tools\TestUtilities\TestCase;
 use React\EventLoop\Factory;
