@@ -6,7 +6,7 @@ use Recoil\Kernel;
 use Rx\ObservableInterface;
 use function WyriHaximus\Rx\observableWhile;
 
-final class QueueCaller
+final class QueueCaller implements QueueCallerInterface
 {
     /**
      * @var Kernel
