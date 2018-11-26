@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
     "content-hash": "144f7125349ed73167542cc0a92b0f2d",
@@ -498,16 +498,16 @@
         },
         {
             "name": "wyrihaximus/rx-recoil-looper",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/WyriHaximus/php-rxphp-recoilphp-looper.git",
-                "reference": "7f56d3781126a9865d56d23f583467fbe2d2962b"
+                "reference": "b8e15dd4ebdf0e8648af0936d3e150b161cb967a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WyriHaximus/php-rxphp-recoilphp-looper/zipball/7f56d3781126a9865d56d23f583467fbe2d2962b",
-                "reference": "7f56d3781126a9865d56d23f583467fbe2d2962b",
+                "url": "https://api.github.com/repos/WyriHaximus/php-rxphp-recoilphp-looper/zipball/b8e15dd4ebdf0e8648af0936d3e150b161cb967a",
+                "reference": "b8e15dd4ebdf0e8648af0936d3e150b161cb967a",
                 "shasum": ""
             },
             "require": {
@@ -542,7 +542,7 @@
                 }
             ],
             "description": "Looper functions for while and foreach around rxphp using recoil",
-            "time": "2018-07-14T18:47:25+00:00"
+            "time": "2018-08-02T06:08:06+00:00"
         }
     ],
     "packages-dev": [
