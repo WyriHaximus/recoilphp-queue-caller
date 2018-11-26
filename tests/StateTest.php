@@ -8,6 +8,9 @@ use Rx\React\Promise;
 use WyriHaximus\Recoil\InvalidStateException;
 use WyriHaximus\Recoil\State;
 
+/**
+ * @internal
+ */
 final class StateTest extends TestCase
 {
     public function provideValidStates()
@@ -22,12 +25,12 @@ final class StateTest extends TestCase
     /**
      * @dataProvider provideValidStates
      */
-    public function testValidState(int $providedState)
+    public function testValidState(int $providedState): void
     {
         $loop = Factory::create();
         $state = new State();
 
-        $loop->futureTick(function () use ($state, $providedState) {
+        $loop->futureTick(function () use ($state, $providedState): void {
             $state->onNext($providedState);
             $state->onCompleted();
         });
@@ -49,12 +52,12 @@ final class StateTest extends TestCase
      * @dataProvider provideInvalidStates
      * @param mixed $providedState
      */
-    public function testInvalidState($providedState)
+    public function testInvalidState($providedState): void
     {
         $loop = Factory::create();
         $state = new State();
 
-        $loop->futureTick(function () use ($state, $providedState) {
+        $loop->futureTick(function () use ($state, $providedState): void {
             $state->onNext($providedState);
             $state->onCompleted();
         });

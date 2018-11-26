@@ -9,21 +9,24 @@ use WyriHaximus\Recoil\Call;
 use WyriHaximus\Recoil\QueueCaller;
 use function ApiClients\Tools\Rx\observableFromArray;
 
+/**
+ * @internal
+ */
 final class QueueCallerTest extends TestCase
 {
-    public function testOne()
+    public function testOne(): void
     {
         $i = 0;
         $array = [];
-        foreach (range(1, 1000) as $_) {
-            $array[] = new Call(function () use (&$i) {
+        foreach (\range(1, 1000) as $_) {
+            $array[] = new Call(function () use (&$i): void {
                 $i++;
             });
         }
 
         $loop = Factory::create();
         $recoil = ReactKernel::create($loop);
-        $recoil->setExceptionHandler(function ($et) {
+        $recoil->setExceptionHandler(function ($et): void {
             echo (string)$et;
         });
         $queueCaller = new QueueCaller($recoil);
