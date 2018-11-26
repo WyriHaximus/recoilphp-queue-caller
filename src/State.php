@@ -14,9 +14,9 @@ final class State extends Subject
 
     private $state = self::CREATED;
 
-    public function onNext($state)
+    public function onNext($state): void
     {
-        if (!is_int($state) || $state < 0 || $state > 4) {
+        if (!\is_int($state) || $state < 0 || $state > 4) {
             throw InvalidStateException::create($state);
         }
 
