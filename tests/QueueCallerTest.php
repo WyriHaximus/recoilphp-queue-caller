@@ -2,12 +2,12 @@
 
 namespace WyriHaximus\Tests\Recoil;
 
+use function ApiClients\Tools\Rx\observableFromArray;
 use ApiClients\Tools\TestUtilities\TestCase;
 use React\EventLoop\Factory;
 use Recoil\React\ReactKernel;
 use WyriHaximus\Recoil\Call;
 use WyriHaximus\Recoil\QueueCaller;
-use function ApiClients\Tools\Rx\observableFromArray;
 
 /**
  * @internal
